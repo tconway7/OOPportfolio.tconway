@@ -68,8 +68,8 @@ g. Remove the last brace in the program.
 
 If you complete the exercises above, answer the following questions.
  
-a. What is the latest version of the Java SDK that is available?\
-b. What is the difference between Java SE and Java ME?\
-c. Which operating system is Java available for?\
-d. What is the most popular IDE available for Java apart from Eclipse?\
-e. What is the main() function for in a Java program?
+a. What is the latest version of the Java SDK that is available? Java 17\
+b. What is the difference between Java SE and Java ME? Java ME (Micro edition) is specifically designed for devices with low operating power.\
+c. Which operating system is Java available for? A wide range, designed to be platform independant\
+d. What is the most popular IDE available for Java apart from Eclipse? IntelliJ\
+e. What is the main() function for in a Java program? The entry point for a java program
