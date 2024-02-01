@@ -1,15 +1,15 @@
 
 # OOP 2024 Portfolio
-## Your Name
-### Your Group
-### Your Tutor
+## Tomas Conway
+### Group D
+### Andrew Scholey
 
 
 
 ## Work Schedule
 **1 Getting Started**\
 **committed by 5th February**\
-1 Hello World        -- to do\
+1 Hello World        -- completed\
 2 Test               -- to do\
 3 Personal Details   -- to do\
 4 Diamonds           -- to do\
