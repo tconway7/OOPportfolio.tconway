@@ -13,7 +13,7 @@
 2 Test               -- completed\
 3 Personal Details   -- completed\
 4 Diamonds           -- completed\
-5 Questions          -- to do
+5 Questions          -- completed
 
 **2 Data and Expressions**\
 **committed by 19th February**\
