@@ -12,7 +12,7 @@
 1 Hello World        -- completed\
 2 Test               -- completed\
 3 Personal Details   -- completed\
-4 Diamonds           -- to do\
+4 Diamonds           -- completed\
 5 Questions          -- to do
 
 **2 Data and Expressions**\
