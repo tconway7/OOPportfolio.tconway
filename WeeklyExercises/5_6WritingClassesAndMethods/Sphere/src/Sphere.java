@@ -1,6 +1,8 @@
 
-public class Sphere {
+class Sphere {
 
+	private double diameter;
+	
 	public Sphere(double diameter) {
         this.diameter = diameter;
     }
@@ -10,10 +12,15 @@ public class Sphere {
 	public double getDiameter() {
 		return diameter;
 	}
-	public double volume() {
+	public double getVolume() {
 		return (4 / 3) * Math.PI * Math.pow((diameter / 2), 3);
 	}
-	public double surfaceArea() {
-		return 4 * Math.PI * Math.pow((diameter / 2), 2)
-	}
+	public double getSurfaceArea() {
+		return 4 * Math.PI * Math.pow(diameter / 2, 2);
+	}			
+    public String toString() {
+        return "Diameter=" + diameter + ", Volume=" + getVolume() +
+                ", Surface Area=" + getSurfaceArea();
+    }
 }
+
