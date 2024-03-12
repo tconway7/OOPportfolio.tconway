@@ -40,8 +40,8 @@
 
 **5 and 6 Writing Classes and Methods**\
 **committed by 18th March**\
-1 Sphere       -- to do\
-2 Books        -- to do\
+1 Sphere       -- completed\
+2 Books        -- completed\
 3 Bulb         -- to do\
 4 Accounts     -- to do\
 5 Cards        -- to do
