@@ -1,2 +1,2 @@
-public class Bulb {
+public class Bulb {0
 }
