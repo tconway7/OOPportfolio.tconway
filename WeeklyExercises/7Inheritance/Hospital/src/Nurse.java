@@ -8,7 +8,7 @@ public class Nurse extends HospitalEmp{
         this.NoOfPatients = NoOfPatients;
     }
 
-    public void treat() {
+    public void patients() {
         System.out.println("Nurse " + name + ", " + employeeNum + ", has " + NoOfPatients + " patients");
     }
 }

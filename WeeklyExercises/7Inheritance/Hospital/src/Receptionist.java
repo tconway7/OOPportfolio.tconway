@@ -8,8 +8,8 @@ public class Receptionist extends HospitalEmp{
         this.deskNo = deskNo;
     }
 
-    public void treat() {
-        System.out.println("Receptionist," + name + "," + employeeNum + ", is posted on desk" + deskNo);
+    public void posted() {
+        System.out.println("Receptionist " + name + ", " + employeeNum + ", is posted on desk " + deskNo);
     }
 }
 
