@@ -48,7 +48,7 @@
 
 **7 Inheritance**\
 **committed by 8th April**\
-1 Hospital            -- to do\
+1 Hospital            -- completed\
 2 Player Statistics   -- to do
 
 **8 Polymorphism**\
