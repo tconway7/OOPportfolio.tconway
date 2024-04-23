@@ -18,14 +18,7 @@ public class Main extends OOPGraphics
         MainFrame.pack();                                               //set the frame to a size we can see
         MainFrame.setVisible(true);                             //now display it
         about();                                                                //call the OOPGraphics about method to display version information.
+        clear();
     }
 
-
-    public void processCommand(String command)      //this method must be provided because OOPGraphics will call it when it's JTextField is used
-    {
-        //String parameter is the text typed into the OOPGraphics JTextfield
-        //lands here if return was pressed or "ok" JButton clicked
-
-        //TO DO
-    }
 }
