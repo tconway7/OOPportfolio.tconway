@@ -2,6 +2,8 @@ import java.awt.*;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.*;
@@ -13,25 +15,30 @@ public class TurtleGraphics extends OOPGraphics{
     public static void main(String[] args) {
         new TurtleGraphics(); //create instance of class that extends OOPGraphics (could be separate class without main), gets out of static context
     }
-
-    public TurtleGraphics()
-    {
-        JFrame MainFrame = new JFrame();                //create a frame to display the turtle panel on
-        JTextArea textArea = new JTextArea();
-
-        MainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //Make sure the app exits when closed
-        MainFrame.setLayout(new FlowLayout());  //not strictly necessary
-        MainFrame.add(this);                                    //"this" is this object that extends turtle graphics so we are adding a turtle graphics panel to the frame
-        MainFrame.pack();                                               //set the frame to a size we can see
-        MainFrame.setVisible(true);                             //now display it
-        about();                                                                //call the OOPGraphics about method to display version information.
+    private final JTextArea textArea;
+    public TurtleGraphics() {
+        JFrame mainFrame = new JFrame();
+        textArea = new JTextArea(10, 30);
+        textArea.setEditable(false);
+        JScrollPane scrollPane = new JScrollPane(textArea);
+        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        mainFrame.setLayout(new BorderLayout());
+        mainFrame.add(scrollPane, BorderLayout.EAST);
+        mainFrame.add(this, BorderLayout.CENTER);
+        mainFrame.pack();
+        mainFrame.setVisible(true);
+        about();
         clear();
         reset();
         penDown();
-
-
     }
 
+
+    @Override
+    public void reset() {
+        super.reset();
+        textArea.setText("");
+    }
 
     public void wait(int ms) {
         try {
@@ -51,6 +58,8 @@ public class TurtleGraphics extends OOPGraphics{
         String[] parts = command.split(" ");
         System.out.println(command);
         Graphics g = getGraphicsContext();
+        textArea.append(command + "\n");
+
 
         if (parts[0].equals("about")) {
             about();
@@ -129,7 +138,16 @@ public class TurtleGraphics extends OOPGraphics{
         }
         else if (parts[0].equals("save")) {
             BufferedImage buff = getBufferedImage();
+            String commands = textArea.getText();
             if (parts.length > 1) {
+                try (PrintWriter writer = new PrintWriter(new File(parts[1] + ".txt"))) {
+                    writer.println(commands);
+                    writer.flush();
+                    displayMessage1(parts[1] + ".txt was saved.");
+                }
+                catch (FileNotFoundException e) {
+                    displayMessage1("This text file could not be saved.");
+                }
                 File outputfile = new File(parts[1] + ".jpg");
                 try {
                     ImageIO.write(buff, "jpg", outputfile);
@@ -139,6 +157,14 @@ public class TurtleGraphics extends OOPGraphics{
                 }
             }
             else {
+                try (PrintWriter writer = new PrintWriter(new File("commands.txt"))) {
+                    writer.println(commands);
+                    writer.flush();
+                    displayMessage1("commands.txt was saved.");
+                }
+                catch (FileNotFoundException e) {
+                    displayMessage1("This text file could not be saved");
+                }
                 File outputfile = new File("buffered.jpg");
                 try {
                     ImageIO.write(buff, "jpg", outputfile);
