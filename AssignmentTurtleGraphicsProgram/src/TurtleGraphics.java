@@ -1,5 +1,6 @@
 import java.awt.*;
 import javax.swing.JFrame;
+import java.awt.Graphics;
 import uk.ac.leedsbeckett.oop.OOPGraphics;
 
 public class TurtleGraphics extends OOPGraphics{
@@ -18,13 +19,28 @@ public class TurtleGraphics extends OOPGraphics{
         MainFrame.setVisible(true);                             //now display it
         about();                                                                //call the OOPGraphics about method to display version information.
         clear();
+        reset();
+        penDown();
 
     }
-
+    public void wait(int ms) {
+        try {
+            Thread.sleep(ms);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+    }
+    public void displayMessage1(String message) {
+        System.out.println(message);
+        displayMessage(message);
+        wait(2000);
+        clearInterface();
+    }
 
     public void processCommand(String command) {
         String[] parts = command.split(" ");
         System.out.println(command);
+        Graphics g = getGraphicsContext();
 
         if (parts[0].equals("about")) {
             about();
@@ -32,35 +48,48 @@ public class TurtleGraphics extends OOPGraphics{
         }
         else if (parts[0].equals("penup")) {
             penUp();
-            System.out.println("Pen state: " + getPenState());
+            displayMessage1("Pen state: " + getPenState());
         }
         else if (parts[0].equals("pendown")) {
             penDown();
-            System.out.println("Pen state: " + getPenState());
+            displayMessage1("Pen state: " + getPenState());
         }
         else if (parts[0].equals("turnleft")){
             if (parts.length > 1) {
-                turnLeft(parts[1]);
+                try {
+                    int object = Integer.parseInt((String) parts[1]);
+                    turnLeft(parts[1]);
+                }
+                catch (NumberFormatException e) {
+                    displayMessage1("Angle given is not an integer");
+
+                }
             }
             else {
                 turnLeft();
-                System.out.println("No angle given, turning 90 degrees.");
+                displayMessage1("No angle given, turning 90 degrees.");
             }
         }
         else if (parts[0].equals("turnright")){
             if (parts.length > 1) {
-                turnRight(parts[1]);
+                try {
+                    int object = Integer.parseInt((String) parts[1]);
+                    turnLeft(parts[1]);
+                }
+                catch (NumberFormatException e) {
+                    displayMessage1("Angle given is not an integer");
+                }
             }
             else {
                 turnRight();
-                System.out.println("No angle given, turning 90 degrees.");
+                displayMessage1("No angle given, turning 90 degrees.");
             }
         }
         else if (parts[0].equals("forward")) {
             if (parts.length > 1) {
                 forward(parts[1]);
             } else {
-                System.out.println("No distance given.");
+                displayMessage1("No distance given.");
             }
         }
         else if (parts[0].equals("backward")) {
@@ -68,7 +97,7 @@ public class TurtleGraphics extends OOPGraphics{
                 int distance = Integer.parseInt(parts[1]);
                 forward(distance * -1);
             } else {
-                System.out.println("No distance given.");
+                displayMessage1("No distance given.");
             }
         }
         else if (parts[0].equals("black")) {
@@ -89,7 +118,7 @@ public class TurtleGraphics extends OOPGraphics{
         else if (parts[0].equals("clear")) {
             clear();
         } else {
-            System.out.println("Command not recognised");
+            displayMessage1("Command not recognised");
             setPenState(false);
             drawCircle(100, 400, 200);
             reset();
