@@ -1,6 +1,11 @@
 import java.awt.*;
-import javax.swing.JFrame;
+import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.*;
+
 import uk.ac.leedsbeckett.oop.OOPGraphics;
 
 public class TurtleGraphics extends OOPGraphics{
@@ -12,6 +17,8 @@ public class TurtleGraphics extends OOPGraphics{
     public TurtleGraphics()
     {
         JFrame MainFrame = new JFrame();                //create a frame to display the turtle panel on
+        JTextArea textArea = new JTextArea();
+
         MainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //Make sure the app exits when closed
         MainFrame.setLayout(new FlowLayout());  //not strictly necessary
         MainFrame.add(this);                                    //"this" is this object that extends turtle graphics so we are adding a turtle graphics panel to the frame
@@ -22,7 +29,10 @@ public class TurtleGraphics extends OOPGraphics{
         reset();
         penDown();
 
+
     }
+
+
     public void wait(int ms) {
         try {
             Thread.sleep(ms);
@@ -62,7 +72,6 @@ public class TurtleGraphics extends OOPGraphics{
                 }
                 catch (NumberFormatException e) {
                     displayMessage1("Angle given is not an integer");
-
                 }
             }
             else {
@@ -117,7 +126,42 @@ public class TurtleGraphics extends OOPGraphics{
         }
         else if (parts[0].equals("clear")) {
             clear();
-        } else {
+        }
+        else if (parts[0].equals("save")) {
+            BufferedImage buff = getBufferedImage();
+            if (parts.length > 1) {
+                File outputfile = new File(parts[1] + ".jpg");
+                try {
+                    ImageIO.write(buff, "jpg", outputfile);
+                    displayMessage1(parts[1] + ".jpg was saved.");
+                } catch (IOException e) {
+                    displayMessage1("The image could not be saved.");
+                }
+            }
+            else {
+                File outputfile = new File("buffered.jpg");
+                try {
+                    ImageIO.write(buff, "jpg", outputfile);
+                    displayMessage1("buffered.jpg was saved.");
+                } catch (IOException e) {
+                    displayMessage1("The image could not be saved.");
+                }
+            }
+
+        }
+        else if (parts[0].equals("load")) {
+            try {
+                BufferedImage loadBuff = ImageIO.read(new File(parts[1]));
+                setBufferedImage(loadBuff);
+                displayMessage1("The image was loaded.");
+            }
+            catch (IOException e) {
+                System.out.println("The image failed to load.");
+            }
+        }
+
+
+        else {
             displayMessage1("Command not recognised");
             setPenState(false);
             drawCircle(100, 400, 200);
