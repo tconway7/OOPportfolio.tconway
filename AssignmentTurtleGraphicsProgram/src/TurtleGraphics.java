@@ -12,13 +12,12 @@ import java.util.Scanner;
 import uk.ac.leedsbeckett.oop.OOPGraphics;
 
 public class TurtleGraphics extends OOPGraphics{
+    public static void main(String[] args) {
+        new TurtleGraphics();
+    }
 
 
     private Object g;
-
-    public static void main(String[] args) {
-        new TurtleGraphics(); //create instance of class that extends OOPGraphics (could be separate class without main), gets out of static context
-    }
     private final JTextArea textArea;
     public boolean saved = false;
     public boolean imgsaved = false;
@@ -40,7 +39,6 @@ public class TurtleGraphics extends OOPGraphics{
         about();
         clear();
         reset();
-        penDown();
         jframeopen = true;;
     }
     public void clearText() {
@@ -109,6 +107,7 @@ public class TurtleGraphics extends OOPGraphics{
         if (!parts[0].equals("save") && !parts[0].equals("clear")) {
             saved = false;
         }
+
         if (parts[0].equals("about")) {
             about();
             clear();
@@ -134,7 +133,7 @@ public class TurtleGraphics extends OOPGraphics{
             if (parts.length > 1) {
                 try {
                     int object = Integer.parseInt((String) parts[1]);
-                    turnLeft(parts[1]);
+                    turnRight(parts[1]);
                 } catch (NumberFormatException e) {
                     displayMessage1("Angle given is not an integer");
                 }
